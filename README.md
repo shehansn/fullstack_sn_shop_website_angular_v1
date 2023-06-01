@@ -28,3 +28,7 @@ ng serve admin
 ng serve --project=fashion-collection
 or
 ng serve fashion-collection
+
+# Run server
+
+npm start

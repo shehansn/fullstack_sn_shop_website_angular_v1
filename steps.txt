@@ -1,1 +1,140 @@
-steps
+in server
+ctrl+shift+p and create prettier configuration file
+
+npm init ---- create server
+npm install prettier
+npm install nodemon
+npm i express
+npm i dotenv
+npm i cors
+npm i body-parser 
+npm i morgan --use morgan middlware to log api req status 
+npm i multer
+npm i bcryptjs
+npm i jsonwebtoken
+npm i express-jwt
+
+
+--------------------------------------------------------
+ng version
+ng new fashion-collection-site
+cd fashion-collection-site
+ng generate application admin --routing
+ng generate application fashion-collection --routing
+
+ng serve --project=admin or ng serve admin
+ng serve --project=fashion-collection  or ng serve fashion-collection
+
+cd projects 
+in admin section
+in pages folder
+ng generate component admin/src/app/pages/dashboard --dry-run  
+ng generate component admin/src/app/pages/dashboard 
+ng generate component admin/src/app/pages/categories/categories-list
+ng generate component admin/src/app/pages/categories/categories-form
+ng generate component admin/src/app/pages/orders/orders-list
+ng generate component admin/src/app/pages/orders/orders-details
+ng generate component admin/src/app/pages/products/products-list
+ng generate component admin/src/app/pages/products/products-form
+ng generate component admin/src/app/pages/users/users-list
+ng generate component admin/src/app/pages/users/users-form
+
+
+in shared folder
+ng generate component admin/src/app/shared/shell
+ng generate component admin/src/app/shared/sidebar
+
+
+in fashion-collection section(project)
+pages folder
+ng generate component fashion-collection/src/app/pages/home-page --dry-run
+ng generate component fashion-collection/src/app/pages/home-page
+
+shared folder
+ng generate component fashion-collection/src/app/shared/footer --dry-run
+ng generate component fashion-collection/src/app/shared/footer
+ng generate component fashion-collection/src/app/shared/header
+ng generate component fashion-collection/src/app/shared/message
+ng generate component fashion-collection/src/app/shared/navigation
+
+------------------------------------------------
+inside libs folder in outseide project directory
+ng generate library orders --dry-run
+ng generate library orders
+ng generate library products
+ng generate library ui
+ng generate library users
+
+--------------------------------------------------------
+generate component inside orders-src-libs-components
+navigate to orders-src-libs and run this
+ng generate component components/cart-icon --dry-run
+ng generate component components/order-summary
+
+ng generate component pages/cart-page
+ng generate component pages/checkout-page
+ng generate component pages/thank-you-page
+
+generate services
+ng generate service services/cart --dry-run
+ng generate service services/cart 
+ng generate service services/orders
+--------------------------------------------------------------
+
+generate component inside products-src-libs
+navigate to products-src-libs and run this
+ng generate component components/categories-banner --dry-run
+ng generate component components/categories-banner
+ng generate component components/featured-products
+ng generate component components/product-item
+ng generate component components/products-search
+ng generate component components/whishlist-products
+
+ng generate component pages/product-page
+ng generate component pages/product-list-page
+ng generate component pages/product-detail-page --dry-run
+
+
+generate services
+ng generate service services/categories --dry-run
+ng generate service services/categories 
+ng generate service services/products
+--------------------------------------------------------------
+
+generate component inside ui-src-libs
+navigate to ui-src-lib and run this
+ng generate component components/banner --dry-run
+ng generate component components/banner
+ng generate component components/gallery
+
+--------------------------------------------------------------
+
+generate component inside users-src-lib
+navigate to users-src-lib and run this
+
+ng generate component pages/login
+ng generate component pages/register
+
+generate services
+ng generate service services/auth-guard
+ng generate service services/auth 
+ng generate service services/localstorage
+ng generate service services/users
+
+--------------------------------------------------------------
+
+npm install @angular/animations --save
+npm install primeng --save
+npm install primeicons --save
+grid asystem
+npm install primeflex --save ->dont use this
+npm i primeflex@2.0.0 --save
+
+npm install quill --save
+npm install @types/quill --save
+npm install @angular/cdk --save
+
+npm install i18n-iso-countries
+npm install animate.css --save
+
+
