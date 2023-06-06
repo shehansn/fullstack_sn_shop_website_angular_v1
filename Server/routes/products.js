@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
         cb(uploadError, 'public/uploads');
     },
     filename: function (req, file, cb) {
-        const fileName = file.originalname.split(' ').join('-');
+        const fileName = file.originalname.split(' ').join('-');//.replace(' ','-')
         const extension = FILE_TYPE_MAP[file.mimetype];
         cb(null, `${fileName}-${Date.now()}.${extension}`);
     }
@@ -30,13 +30,19 @@ const storage = multer.diskStorage({
 
 const uploadOptions = multer({ storage: storage });
 
+
 router.get(`/`, async (req, res) => {
+    //http://localhost:3000/api/v1/products?categories=64799a0aa5b3c33770ccc403
+    //http://localhost:3000/api/v1/products?categories=64799a0aa5b3c33770ccc403,647999f0a5b3c33770ccc3ff
+
     let filter = {};
     if (req.query.categories) {
         filter = { category: req.query.categories.split(',') };
     }
 
     const productList = await Product.find(filter).populate('category');
+    //const productList = await Product.find(filter).select('name image'); //to select products and only select name and image
+    //const productList = await Product.find();
 
     if (!productList) {
         res.status(500).json({ success: false });
@@ -46,6 +52,7 @@ router.get(`/`, async (req, res) => {
 
 router.get(`/:id`, async (req, res) => {
     const product = await Product.findById(req.params.id).populate('category');
+    //const product = await Product.findById(req.params.id)
 
     if (!product) {
         res.status(500).json({ success: false });
@@ -62,11 +69,13 @@ router.post(`/`, uploadOptions.single('image'), async (req, res) => {
 
     const fileName = file.filename;
     const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
+
     let product = new Product({
         name: req.body.name,
         description: req.body.description,
         richDescription: req.body.richDescription,
-        image: `${basePath}${fileName}`, // "http://localhost:3000/public/upload/image-2323232"
+        image: `${basePath}${fileName}`,     //image: "http://localhost:3000/public/upload/image-2323232",
+
         brand: req.body.brand,
         price: req.body.price,
         category: req.body.category,
@@ -87,6 +96,7 @@ router.put('/:id', uploadOptions.single('image'), async (req, res) => {
     if (!mongoose.isValidObjectId(req.params.id)) {
         return res.status(400).send('Invalid Product Id');
     }
+
     const category = await Category.findById(req.body.category);
     if (!category) return res.status(400).send('Invalid Category');
 
@@ -111,6 +121,7 @@ router.put('/:id', uploadOptions.single('image'), async (req, res) => {
             description: req.body.description,
             richDescription: req.body.richDescription,
             image: imagepath,
+            //image: req.body.image,
             brand: req.body.brand,
             price: req.body.price,
             category: req.body.category,
@@ -155,6 +166,17 @@ router.get(`/get/count`, async (req, res) => {
     });
 });
 
+router.get(`/get/featured`, async (req, res) => {
+
+    const products = await Product.find({ isFeatured: true })
+
+    if (!products) {
+        res.status(500).json({ success: false });
+    }
+    res.send(products);
+});
+
+
 router.get(`/get/featured/:count`, async (req, res) => {
     const count = req.params.count ? req.params.count : 0;
     const products = await Product.find({ isFeatured: true }).limit(+count);
@@ -164,6 +186,7 @@ router.get(`/get/featured/:count`, async (req, res) => {
     }
     res.send(products);
 });
+
 
 router.put('/gallery-images/:id', uploadOptions.array('images', 10), async (req, res) => {
     if (!mongoose.isValidObjectId(req.params.id)) {

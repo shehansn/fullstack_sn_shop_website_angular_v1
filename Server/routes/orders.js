@@ -6,6 +6,13 @@ const router = express.Router();
 router.get(`/`, async (req, res) => {
     const orderList = await Order.find()
         .populate("user", "name")
+        .populate({
+            path: "orderItems",
+            populate: {
+                path: "product",
+                populate: "category",
+            },
+        })
         .sort({ dateOrdered: -1 });
 
     if (!orderList) {
@@ -60,7 +67,7 @@ router.post("/", async (req, res) => {
         })
     );
 
-    const totalPrice = totalPrices.reduce((a, b) => a + b, 0);
+    const totalPrice = totalPrices.reduce((a, b) => a + b, 0);//get sum of all numbers inside totalPrices Array
 
     console.log(totalPrices);
 
