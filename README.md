@@ -25,7 +25,7 @@ ng serve admin
 
 # Run client
 
-ng serve --project=fashion-collection
+ng serve --project=sn_shop_client
 or
 ng serve fashion-collection
 
