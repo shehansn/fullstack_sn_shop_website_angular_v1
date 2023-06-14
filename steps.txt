@@ -88,9 +88,9 @@ ng generate component pages/checkout-page
 ng generate component pages/thank-you-page
 
 generate services
-ng generate service services/cart --dry-run
-ng generate service services/cart 
-ng generate service services/orders
+ng generate service --name=services/orders --project=orders --dry-run
+ng generate service --name=services/cart --project=orders
+ng generate service services/orders --project=orders
 --------------------------------------------------------------
 
 generate component inside products-src-libs
@@ -122,10 +122,11 @@ ng generate component pages/login
 ng generate component pages/register
 
 generate services
-ng generate service services/auth-guard
-ng generate service services/auth 
-ng generate service services/localstorage
-ng generate service services/users
+ng generate service --name=services/auth-guard --project=users --dry-run
+ng generate service --name=services/auth-guard --project=users 
+ng generate service --name=services/auth --project=users 
+ng generate service --name=services/localstorage --project=users 
+ng generate service --name=services/users --project=users 
 
 --------------------------------------------------------------
 
@@ -136,11 +137,11 @@ grid a system
 npm install primeflex --save ->dont use this
 npm i primeflex@2.0.0 --legacy-peer-deps --save
 
-npm install quill --legacy-peer-deps --save
+npm install quill --legacy-peer-deps --save                   //--- for p-description
 npm install @types/quill --legacy-peer-deps --save
 npm install @angular/cdk --legacy-peer-deps --save
 
-npm install i18n-iso-countries --legacy-peer-deps
+npm install i18n-iso-countries@6.6.0 --legacy-peer-deps //npm install i18n-iso-countries --save //https://stackoverflow.com/questions/52600104/how-to-use-i18n-iso-countries-in-angular-6
 npm install animate.css --legacy-peer-deps --save
 npm install normalize.css
 

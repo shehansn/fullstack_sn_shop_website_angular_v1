@@ -28,6 +28,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ColorPickerModule } from 'primeng/colorpicker';
+import { FieldsetModule } from 'primeng/fieldset';
 
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
@@ -44,7 +45,8 @@ const UX_MODULE = [
   ToolbarModule,
   ButtonModule,
   ToastModule, TableModule, InputTextModule, ConfirmDialogModule, ColorPickerModule,
-  InputNumberModule, DropdownModule, InputTextareaModule, InputSwitchModule, EditorModule, TagModule, InputMaskModule
+  InputNumberModule, DropdownModule, InputTextareaModule, InputSwitchModule, EditorModule,
+  TagModule, InputMaskModule, FieldsetModule
 
 ]
 @NgModule({

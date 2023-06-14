@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductsService } from 'libs/products/src/lib/services/products.service';
-import { Product } from 'libs/products/src/lib/models/products';
+import { Product } from 'libs/products/src/lib/models/product';
 
 @Component({
   selector: 'admin-products-list',
