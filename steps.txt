@@ -1,1 +1,148 @@
-steps
+in server
+ctrl+shift+p and create prettier configuration file
+
+npm init ---- create server
+npm install prettier
+npm install nodemon
+npm i express
+npm i dotenv
+npm i cors
+npm i body-parser 
+npm i morgan --use morgan middlware to log api req status 
+npm i multer
+npm i bcryptjs
+npm i jsonwebtoken
+npm i express-jwt
+-----------------------------------------------------------
+ng new sn_shop --create-application=false
+cd sn_shop
+ng generate application admin
+ng generate application sn_shop_client
+--------------------------------------------------------
+//in project client and admin
+//ng version
+//ng new sn-shop
+//cd sn-shop
+//ng generate application admin --routing
+//ng generate application fashion-collection --routing
+
+ng serve --project=admin or ng serve admin
+ng serve --project=sn_shop_client  or ng serve fashion-sn_shop_client
+
+
+//cd sn_shop
+ng generate component pages/home-page --project=sn_shop_client --dry-run 
+ng generate component pages/home-page --project=sn_shop_client
+ng generate component pages/product-list --project=sn_shop_client
+
+ng generate component shared/footer --project=sn_shop_client --dry-run 
+ng generate component shared/header --project=sn_shop_client
+ng generate component shared/footer --project=sn_shop_client
+ng generate component shared/message --project=sn_shop_client
+ng generate component shared/navigation --project=sn_shop_client
+
+//cd admin
+ng generate component pages/dashboard --project=admin --selector=admin-dashboard --no-interactive --dry-run  
+ng generate component pages/dashboard --project=admin --selector=admin-dashboard --no-interactive
+ng generate component pages/categories/categories-list --project=admin --selector=admin-categories-list --no-interactive
+ng generate component pages/categories/categories-form --project=admin --selector=admin-categories-form --no-interactive
+ng generate component pages/orders/orders-list --project=admin --selector=admin-orders-list --no-interactive
+ng generate component pages/orders/orders-details --project=admin --selector=admin-orders-details --no-interactive
+ng generate component pages/products/products-list --project=admin --selector=admin-products-list --no-interactive
+ng generate component pages/products/products-form --project=admin --selector=admin-products-form --no-interactive
+ng generate component pages/users/users-list --project=admin --selector=admin-users-list --no-interactive
+ng generate component pages/users/users-form --project=admin --selector=admin-users-form --no-interactive
+
+ng generate component shared/shell --project=admin --selector=admin-shell --no-interactive 
+ng generate component shared/sidebar --project=admin --selector=admin-sidebar --no-interactive
+
+
+------------------------------------------------
+inside libs folder (libs folder is outside project directory)
+//change   "newProjectRoot": "projects", to   "newProjectRoot": "libs", in angular.json file and create libraries 
+
+ng generate library orders --dry-run
+ng generate library orders
+ng generate library products
+ng generate library ui
+ng generate library users
+//ng generate library users --buildable --enableIvy --linter=eslint --prefix=users --routing
+
+--------------------------------------------------------
+
+generate component inside ui-src-libs
+navigate to ui-src-lib and run this
+ng generate component --name=banner --project=ui --export --prefix=ui --selector=banner --dry-run
+ng generate component --name=banner --project=ui --export --prefix=ui --selector=banner
+ng generate component --name=gallery --project=ui --export --prefix=ui --selector=gallery
+
+--------------------------------------------------------------
+
+generate component inside orders-src-libs-components
+navigate to orders-src-libs and run this
+ng generate component components/cart-icon --dry-run
+ng generate component components/order-summary
+
+ng generate component pages/cart-page
+ng generate component pages/checkout-page
+ng generate component pages/thank-you-page
+
+generate services
+ng generate service services/cart --dry-run
+ng generate service services/cart 
+ng generate service services/orders
+--------------------------------------------------------------
+
+generate component inside products-src-libs
+navigate to products-src-libs and run this
+ng generate component components/categories-banner --dry-run
+ng generate component components/categories-banner
+ng generate component components/featured-products
+ng generate component components/product-item
+ng generate component components/products-search
+ng generate component components/whishlist-products
+
+ng generate component pages/product-page
+ng generate component pages/product-list-page
+ng generate component pages/product-detail-page --dry-run
+
+
+generate services
+ng generate service --name=services/categories --project=products --dry-run
+ng generate service --name=services/categories --project=products
+ng generate service --name=services/products --project=products
+--------------------------------------------------------------
+create enviremnemts 
+-------------------------------------------------------------------
+
+generate component inside users-src-lib
+navigate to users-src-lib and run this
+
+ng generate component pages/login
+ng generate component pages/register
+
+generate services
+ng generate service services/auth-guard
+ng generate service services/auth 
+ng generate service services/localstorage
+ng generate service services/users
+
+--------------------------------------------------------------
+
+npm install @angular/animations --save
+npm install primeng@15.1.1 --legacy-peer-deps --save
+npm install primeicons --legacy-peer-deps --save
+grid a system
+npm install primeflex --save ->dont use this
+npm i primeflex@2.0.0 --legacy-peer-deps --save
+
+npm install quill --legacy-peer-deps --save
+npm install @types/quill --legacy-peer-deps --save
+npm install @angular/cdk --legacy-peer-deps --save
+
+npm install i18n-iso-countries --legacy-peer-deps
+npm install animate.css --legacy-peer-deps --save
+npm install normalize.css
+
+
+
