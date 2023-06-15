@@ -18,7 +18,8 @@ export class OrdersDetailsComponent implements OnInit, OnDestroy {
   order!: Order;
   orderStatuses: any;
   selectedStatus: any;
-  endsubs$: Subject<any> = new Subject();
+  //endsubs$: Subject<any> = new Subject();
+  endSubs$ = new Subject<void>();
 
   constructor(
     private messageService: MessageService,
@@ -34,15 +35,12 @@ export class OrdersDetailsComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
 
-    //this.endsubs$.next();
-    this.endsubs$.complete();
+    this.endSubs$.next();
+    this.endSubs$.complete();
   }
   onCancle() {
     this.location.back();
   }
-
-
-
 
   private _mapOrderStatus() {
     this.orderStatuses = Object.keys(ORDER_STATUS).map((key) => {
@@ -58,7 +56,7 @@ export class OrdersDetailsComponent implements OnInit, OnDestroy {
       if (params['id']) {
         this.orderService
           .getOrder(params['id'])
-          .pipe(takeUntil(this.endsubs$))
+          .pipe(takeUntil(this.endSubs$))
           .subscribe((order) => {
             this.order = order;
             this.selectedStatus = order.status;
@@ -70,7 +68,7 @@ export class OrdersDetailsComponent implements OnInit, OnDestroy {
   onStatusChange(event: { value: any; }) {
     this.orderService
       .updateOrder({ status: event.value }, this.order.id)
-      .pipe(takeUntil(this.endsubs$))
+      .pipe(takeUntil(this.endSubs$))
       .subscribe(
         () => {
           this.messageService.add({

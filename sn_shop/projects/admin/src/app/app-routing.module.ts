@@ -11,11 +11,15 @@ import { UsersListComponent } from './pages/users/users-list/users-list.componen
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 import { UsersFormComponent } from './pages/users/users-form/users-form.component';
 import { OrdersDetailsComponent } from './pages/orders/orders-details/orders-details.component';
+import { AuthGuardService } from 'libs/users/src/lib/services/auth-guard.service';
+import { UsersModule } from 'libs/users/src/lib/users.module';
 
 const routes: Routes = [{
 
   path: '',
   component: ShellComponent,
+  //canActivate: [AuthGuardService],
+  canActivateChild: [AuthGuardService],
   children: [
     {
       path: '',
@@ -68,10 +72,17 @@ const routes: Routes = [{
     },
 
   ]
-}];
+},
+{
+  path: '**',
+  redirectTo: '',
+  pathMatch: 'full'
+}
+
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), UsersModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

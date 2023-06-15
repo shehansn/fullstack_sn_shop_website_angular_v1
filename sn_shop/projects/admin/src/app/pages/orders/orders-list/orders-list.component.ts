@@ -15,7 +15,8 @@ import { Router } from '@angular/router';
 export class OrdersListComponent implements OnInit {
   orders: Order[] = [];
   orderStatus = ORDER_STATUS;
-  endsubs$: Subject<any> = new Subject();
+  //endsubs$: Subject<any> = new Subject();
+  endSubs$ = new Subject<void>();
 
   constructor(
     private ordersService: OrdersService,
@@ -28,14 +29,14 @@ export class OrdersListComponent implements OnInit {
     this._getOrders();
   }
   ngOnDestroy() {
-    //this.endsubs$.next();
-    this.endsubs$.complete();
+    this.endSubs$.next();
+    this.endSubs$.complete();
   }
 
   _getOrders() {
     this.ordersService
       .getOrders()
-      .pipe(takeUntil(this.endsubs$))
+      .pipe(takeUntil(this.endSubs$))
       .subscribe((orders) => {
         this.orders = orders;
       });
@@ -53,7 +54,7 @@ export class OrdersListComponent implements OnInit {
       accept: () => {
         this.ordersService
           .deleteOrder(orderId)
-          .pipe(takeUntil(this.endsubs$))
+          .pipe(takeUntil(this.endSubs$))
           .subscribe(
             () => {
               this._getOrders();

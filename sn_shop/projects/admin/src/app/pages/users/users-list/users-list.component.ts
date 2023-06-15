@@ -13,7 +13,8 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class UsersListComponent implements OnInit {
   users: User[] = [];
-  endsubs$: Subject<any> = new Subject();
+  //endsubs$: Subject<any> = new Subject();
+  endSubs$ = new Subject<void>();
 
   constructor(
     private usersService: UsersService,
@@ -27,8 +28,8 @@ export class UsersListComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    //this.endsubs$.next();
-    this.endsubs$.complete();
+    this.endSubs$.next();
+    this.endSubs$.complete();
   }
 
   deleteUser(userId: string) {
@@ -39,7 +40,7 @@ export class UsersListComponent implements OnInit {
       accept: () => {
         this.usersService
           .deleteUser(userId)
-          .pipe(takeUntil(this.endsubs$))
+          .pipe(takeUntil(this.endSubs$))
           .subscribe(
             () => {
               this._getUsers();
@@ -72,7 +73,7 @@ export class UsersListComponent implements OnInit {
   private _getUsers() {
     this.usersService
       .getUsers()
-      .pipe(takeUntil(this.endsubs$))
+      .pipe(takeUntil(this.endSubs$))
       .subscribe((users) => {
         this.users = users;
       });

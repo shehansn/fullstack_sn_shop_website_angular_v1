@@ -1,3 +1,6 @@
+github name-shehansn/fullstack_sn_shop_website_angular_v1
+mongodb name- project- SHEHAN'S ORG - 2022-12-26 > FULLSTACK_SN_SHOP_WEBSITE_ANGULAR_V1
+
 in server
 ctrl+shift+p and create prettier configuration file
 
@@ -118,8 +121,8 @@ create enviremnemts
 generate component inside users-src-lib
 navigate to users-src-lib and run this
 
-ng generate component pages/login
-ng generate component pages/register
+ng generate component --name=pages/login --project=users --selector=users-login --no-interactive
+ng generate component --name=pages/register --project=users --selector=users-register --no-interactive
 
 generate services
 ng generate service --name=services/auth-guard --project=users --dry-run
