@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CategoriesService } from 'libs/products/src/lib/services/categories.service';
 import { ProductsService } from 'libs/products/src/lib/services/products.service';
 import { MessageService } from 'primeng/api';
-import { Product } from 'libs/products/src/lib/models/products';
+import { Product } from 'libs/products/src/lib/models/product';
 import { timer } from 'rxjs';
 
 @Component({
@@ -19,7 +19,7 @@ export class ProductsFormComponent implements OnInit {
   form!: FormGroup;
   isSubmitted = false;
   catagories: Category[] = [];
-  imageDisplay!: string | ArrayBuffer;
+  imageDisplay?: string | ArrayBuffer;
   currentProductId!: string;
 
   constructor(
@@ -112,14 +112,14 @@ export class ProductsFormComponent implements OnInit {
         this.currentProductId = params['id'];
         this.productsService.getProduct(params['id']).subscribe((product) => {
           this.productForm['name'].setValue(product.name);
-          //this.productForm['category'].setValue(product.category.id);
+          this.productForm['category'].setValue(product.category?.id);
           this.productForm['brand'].setValue(product.brand);
           this.productForm['price'].setValue(product.price);
           this.productForm['countInStock'].setValue(product.countInStock);
           this.productForm['isFeatured'].setValue(product.isFeatured);
           this.productForm['description'].setValue(product.description);
           this.productForm['richDescription'].setValue(product.richDescription);
-          //this.imageDisplay = product.image;
+          this.imageDisplay = product.image;
           this.productForm['image'].setValidators([]);
           this.productForm['image'].updateValueAndValidity();
         });
@@ -145,17 +145,34 @@ export class ProductsFormComponent implements OnInit {
     this.location.back();
   }
 
-  onImageUpload(event: { target: { files: any[]; }; }) {
-    const file = event.target.files[0];
+  onImageUpload(event: any) {
+    const file: File = event.target.files[0];
     // if (file) {
     //   this.form.patchValue({ image: file });
-    //   this.form.get('image').updateValueAndValidity();
+    //   //this.form.get('image').updateValueAndValidity();
     //   const fileReader = new FileReader();
     //   fileReader.onload = () => {
-    //     this.imageDisplay = fileReader.result;
+    //     //this.imageDisplay = fileReader.result;
     //   };
     //   fileReader.readAsDataURL(file);
     // }
+    if (file) {
+      this.form.patchValue({ image: file });
+      const imageControl = this.form?.get('image');
+      if (imageControl) {
+        imageControl.setValue(file);
+        imageControl.markAsDirty();
+        imageControl.markAsTouched();
+        imageControl.updateValueAndValidity();
+      }
+      const fileReader = new FileReader();
+
+      fileReader.onload = () => {
+        this.imageDisplay = fileReader.result as string;
+      };
+
+      fileReader.readAsDataURL(file);
+    }
   }
 
   get productForm() {

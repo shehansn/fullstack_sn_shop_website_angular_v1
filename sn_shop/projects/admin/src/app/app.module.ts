@@ -28,6 +28,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ColorPickerModule } from 'primeng/colorpicker';
+import { FieldsetModule } from 'primeng/fieldset';
 
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
@@ -37,14 +38,17 @@ import { EditorModule } from 'primeng/editor';
 import { TagModule } from 'primeng/tag';
 import { InputMaskModule } from 'primeng/inputmask';
 import { CategoriesService } from 'libs/products/src/lib/services/categories.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { UsersModule } from 'libs/users/src/lib/users.module';
+import { JwtInterceptor } from 'libs/users/src/lib/services/jwt.interceptor';
 
 const UX_MODULE = [
   CardModule,
   ToolbarModule,
   ButtonModule,
   ToastModule, TableModule, InputTextModule, ConfirmDialogModule, ColorPickerModule,
-  InputNumberModule, DropdownModule, InputTextareaModule, InputSwitchModule, EditorModule, TagModule, InputMaskModule
+  InputNumberModule, DropdownModule, InputTextareaModule, InputSwitchModule, EditorModule,
+  TagModule, InputMaskModule, FieldsetModule
 
 ]
 @NgModule({
@@ -69,9 +73,15 @@ const UX_MODULE = [
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    UsersModule,
     ...UX_MODULE
   ],
-  providers: [CategoriesService, ConfirmationService, MessageService],
+  providers: [
+    CategoriesService,
+    ConfirmationService,
+    MessageService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

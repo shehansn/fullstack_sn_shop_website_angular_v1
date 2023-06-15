@@ -128,7 +128,12 @@
             </div>
             <div class="p-field p-col-12">
               <label for="name">Main Image</label>
-              <input type="file" class="p-inputtext" accept="image/*" />
+              <input
+                type="file"
+                class="p-inputtext"
+                accept="image/*"
+                (change)="onImageUpload($event)"
+              />
               <small
                 *ngIf="productForm['image'].invalid && isSubmitted"
                 class="p-error"

@@ -4,56 +4,73 @@
       <div class="p-col-5">
         <p-card
           styleClass="d-orders"
-          [style]="{ 'background-color': '#5b7d91' }"
+          [style]="{
+            'background-color': '#F4D03F',
+            'background-image':
+              'linear-gradient(132deg, #F4D03F 0%, #16A085 100%)'
+          }"
         >
           <div class="d-item">
             <div>
               <i class="pi pi-shopping-cart"></i><br />
               <span class="name">Orders</span>
             </div>
-            <span class="number">1</span>
+            <span class="number">{{ statistics[0] }}</span>
           </div>
         </p-card>
       </div>
       <div class="p-col-5 p-offset-1">
         <p-card
           styleClass="d-products"
-          [style]="{ 'background-color': '#7689e9' }"
+          [style]="{
+            'background-color': '#FBDA61',
+            'background-image':
+              'linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%)'
+          }"
         >
           <div class="d-item">
             <div>
               <i class="pi pi-briefcase"></i><br />
               <span class="name">Products</span>
             </div>
-            <span class="number">2</span>
+            <span class="number">{{ statistics[1] }}</span>
           </div>
         </p-card>
       </div>
       <div class="p-col-5">
         <p-card
           styleClass="d-users"
-          [style]="{ 'background-color': '#76c6cc' }"
+          [style]="{
+            'background-color': '#FBAB7E',
+            'background-image':
+              'linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)'
+          }"
         >
           <div class="d-item">
             <div>
               <i class="pi pi-users"></i><br />
               <span class="name">Users</span>
             </div>
-            <span class="number">3</span>
+            <span class="number">{{ statistics[2] }}</span>
           </div>
         </p-card>
       </div>
       <div class="p-col-5 p-offset-1">
         <p-card
           styleClass="d-totalsales"
-          [style]="{ 'background-color': '#ddaa7a' }"
+          [style]="{
+            'background-color': '#FF3CAC',
+            'background-image':
+              'linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%)'
+          }"
         >
           <div class="d-item">
             <div>
-              <i class="pi pi-dollar"></i><br />
+              <p class="pi">LKR</p>
+              <br />
               <span class="name">TotalSales</span>
             </div>
-            <span class="number"> 100 LKR </span>
+            <span class="number">{{ statistics[3] | currency : "LKR " }}</span>
           </div>
         </p-card>
       </div>
