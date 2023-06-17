@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { BannerComponent } from './banner/banner.component';
 import { GalleryComponent } from './gallery/gallery.component';
 
+import { ButtonModule } from 'primeng/button';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +15,7 @@ import { GalleryComponent } from './gallery/gallery.component';
     BannerComponent,
     GalleryComponent
   ],
-  imports: [RouterModule, CommonModule
+  imports: [RouterModule, CommonModule, ButtonModule
   ],
   exports: [
     UiComponent,

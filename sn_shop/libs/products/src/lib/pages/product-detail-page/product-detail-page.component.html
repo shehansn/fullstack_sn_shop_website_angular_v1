@@ -1,0 +1,102 @@
+<div class="product-page" *ngIf="product">
+  <div class="p-grid">
+    <div class="p-col-6">
+      <lib-ui-gallery
+        [images]="product.images"
+        [image]="product.image"
+      ></lib-ui-gallery>
+    </div>
+    <div class="p-col-6 product">
+      <h2 class="product-name">{{ product.name }}</h2>
+      <p class="product-desc">
+        {{ product.description }}
+      </p>
+      <div class="product-rating">
+        <p-rating
+          [(ngModel)]="product.rating"
+          [cancel]="false"
+          [disabled]="true"
+        ></p-rating>
+      </div>
+      <div class="product-price">
+        {{ product.price | currency : "LKR " }}
+        <span class="price-before">{{
+          product.price + 18000 | currency : "LKR "
+        }}</span>
+      </div>
+      <div class="product-quantity">
+        <div class="p-field p-col-12 p-md-3 p-p-0">
+          <label for="quantity">Quantity</label>
+          <p-inputNumber
+            [(ngModel)]="quantity"
+            mode="decimal"
+            [showButtons]="true"
+            inputId="quantity"
+            [min]="1"
+            [max]="100"
+            decrementButtonClass="p-button-danger"
+            incrementButtonClass="p-button-success"
+            buttonLayout="horizontal"
+            incrementButtonIcon="pi pi-plus"
+            decrementButtonIcon="pi pi-minus"
+          >
+          </p-inputNumber>
+          <!-- <p-inputNumber
+            [(ngModel)]="quantity"
+            mode="decimal"
+            [showButtons]="true"
+            inputId="quantity"
+            [min]="1"
+            [max]="100"
+            decrementButtonClass="p-button-danger"
+            incrementButtonClass="p-button-success"
+          >
+          </p-inputNumber> -->
+        </div>
+      </div>
+      <div class="product-actions">
+        <!-- <button
+          pButton
+          pRipple
+          type="button"
+          label="Buy Now"
+          class="p-button-rounded p-mr-2"
+          [style]="{
+            'background-color': '#DC143C',
+            color: '#ffffff',
+            border: '0',
+            height: '50px'
+          }"
+        ></button> -->
+        <p-button
+          label="Buy Now"
+          styleClass="p-button-rounded p-button-danger p-mr-2"
+        ></p-button>
+        <!-- <button
+          pButton
+          pRipple
+          type="button"
+          label="Add to Cart"
+          class="p-button-rounded"
+          (click)="addProductToCart()"
+          [style]="{
+            'background-color': '#DC143C',
+            color: '#ffffff',
+            border: '0',
+            height: '50px'
+          }"
+        ></button> -->
+        <p-button
+          label="Add to Cart"
+          styleClass="p-button-rounded p-button-danger"
+          (click)="addProductToCart()"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+  <div class="p-grid product-rich-desc">
+    <div class="p-col-12">
+      <div [innerHTML]="product.richDescription"></div>
+    </div>
+  </div>
+</div>

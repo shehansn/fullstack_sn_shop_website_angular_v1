@@ -34,6 +34,7 @@ ng serve --project=sn_shop_client  or ng serve fashion-sn_shop_client
 
 
 //cd sn_shop
+  change "newProjectRoot": "libs" to   "newProjectRoot": "products", in angular.json 
 ng generate component pages/home-page --project=sn_shop_client --dry-run 
 ng generate component pages/home-page --project=sn_shop_client
 ng generate component pages/product-list --project=sn_shop_client
@@ -41,7 +42,7 @@ ng generate component pages/product-list --project=sn_shop_client
 ng generate component shared/footer --project=sn_shop_client --dry-run 
 ng generate component shared/header --project=sn_shop_client
 ng generate component shared/footer --project=sn_shop_client
-ng generate component shared/message --project=sn_shop_client
+ng generate component shared/messages --project=sn_shop_client
 ng generate component shared/navigation --project=sn_shop_client
 
 //cd admin
@@ -83,31 +84,32 @@ ng generate component --name=gallery --project=ui --export --prefix=ui --selecto
 
 generate component inside orders-src-libs-components
 navigate to orders-src-libs and run this
-ng generate component components/cart-icon --dry-run
-ng generate component components/order-summary
+ng generate component --name=components/cart-icon --project=orders --dry-run 
+ng generate component --name=components/order-summary --project=orders
 
-ng generate component pages/cart-page
-ng generate component pages/checkout-page
-ng generate component pages/thank-you-page
+ng generate component --name=pages/cart-page --project=orders
+ng generate component --name=pages/checkout-page --project=orders
+ng generate component --name=pages/thank-you-page --project=orders
 
 generate services
 ng generate service --name=services/orders --project=orders --dry-run
+ng generate service --name=services/orders --project=orders
 ng generate service --name=services/cart --project=orders
 ng generate service services/orders --project=orders
 --------------------------------------------------------------
 
 generate component inside products-src-libs
 navigate to products-src-libs and run this
-ng generate component components/categories-banner --dry-run
-ng generate component components/categories-banner
-ng generate component components/featured-products
-ng generate component components/product-item
-ng generate component components/products-search
-ng generate component components/whishlist-products
+ng generate component --name=components/categories-banner --project=products --dry-run
+ng generate component --name=components/categories-banner --project=products 
+ng generate component --name=components/featured-products --project=products 
+ng generate component --name=components/product-item --project=products 
+ng generate component --name=components/products-search --project=products 
+ng generate component --name=components/whishlist-products --project=products 
 
-ng generate component pages/product-page
-ng generate component pages/product-list-page
-ng generate component pages/product-detail-page --dry-run
+ng generate component --name=pages/product-page --project=products 
+ng generate component --name=pages/product-list-page --project=products 
+ng generate component --name=pages/product-detail-page  --project=products 
 
 
 generate services
@@ -131,6 +133,8 @@ ng generate service --name=services/auth --project=users
 ng generate service --name=services/localstorage --project=users 
 ng generate service --name=services/users --project=users 
 
+
+ng add @ngrx/store@latest --project=users --path=libs/users/src/lib/users.module.ts --stateInterface=state --no-interactive --facade --dry-run
 --------------------------------------------------------------
 
 npm install @angular/animations --save

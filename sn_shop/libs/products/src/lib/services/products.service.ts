@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Product } from '../models/product';
@@ -12,8 +12,16 @@ export class ProductsService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiURLProducts);
+  // getProducts(): Observable<Product[]> {
+  //   return this.http.get<Product[]>(this.apiURLProducts);
+  // }
+
+  getProducts(categoriesFilter?: string[]): Observable<Product[]> {
+    let params = new HttpParams();
+    if (categoriesFilter) {
+      params = params.append('categories', categoriesFilter.join(','));
+    }
+    return this.http.get<Product[]>(this.apiURLProducts, { params: params });
   }
 
   createProduct(productData: FormData): Observable<Product> {
@@ -35,5 +43,8 @@ export class ProductsService {
     return this.http
       .get<number>(`${this.apiURLProducts}/get/count`)
       .pipe(map((objectValue: any) => objectValue.productCount));
+  }
+  getFeaturedProducts(count: number): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiURLProducts}/get/featured/${count}`);
   }
 }

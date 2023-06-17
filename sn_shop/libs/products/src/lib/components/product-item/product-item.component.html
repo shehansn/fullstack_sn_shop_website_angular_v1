@@ -1,0 +1,41 @@
+<div class="product-item" *ngIf="product">
+  <div class="product-item-wrapper">
+    <img
+      [routerLink]="'/products/' + product.id"
+      [src]="product.image"
+      class="image"
+      alt=""
+    />
+    <h4 class="name">{{ product.name }}</h4>
+    <h5 class="price">{{ product.price | currency }}</h5>
+    <!-- <p-button
+      styleClass="p-mt-3 add-to-cart"
+      label="Add to cart"
+      icon="pi pi-shopping-cart"
+      (onClick)="addProductToCart()"
+    ></p-button> -->
+    <p-button
+      styleClass="p-mt-4 add-to-cart"
+      icon="pi pi-shopping-cart"
+      iconPos="right"
+      [style]="{
+        'background-color': '#DC143C',
+        color: '#ffffff',
+        border: '0',
+        'border-radius': '13px',
+        height: '50px'
+      }"
+      label="Add to cart"
+      (onClick)="addProductToCart()"
+    ></p-button>
+    <!-- <div class="p-mt-3">
+      <a (click)="addProductToCart()" href="#" class="add-to-cart"
+        >Add to cart
+        <i
+          class="pi pi-shopping-cart p-text-secondary"
+          style="font-size: 1rem"
+        ></i
+      ></a>
+    </div> -->
+  </div>
+</div>
