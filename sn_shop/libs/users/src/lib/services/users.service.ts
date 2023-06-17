@@ -12,6 +12,7 @@ declare const require: (arg0: string) => i18nIsoCountries.LocaleData;
   providedIn: 'root'
 })
 export class UsersService {
+
   apiURLUsers = environment.apiUrl + 'users';
 
   constructor(private http: HttpClient) {
@@ -56,4 +57,20 @@ export class UsersService {
   getCountry(countryKey: string): string {
     return countriesLib.getName(countryKey, 'en');
   }
+
+  initAppSession() {
+    //this.usersFacade.buildUserSession();
+  }
+
+  observeCurrentUser() {
+    //return this.usersFacade.currentUser$;
+    return true
+  }
+
+  isCurrentUserAuth() {
+    // return this.usersFacade.isAuthenticated$;
+    return true
+
+  }
+
 }

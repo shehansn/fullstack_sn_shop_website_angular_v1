@@ -9,8 +9,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class OrdersService {
-  apiURLOrders = environment.apiUrl + 'orders';
 
+  apiURLOrders = environment.apiUrl + 'orders';
+  apiURLProducts = environment.apiUrl + 'products';
   constructor(private http: HttpClient) { }
 
   getOrders(): Observable<Order[]> {
@@ -43,5 +44,9 @@ export class OrdersService {
     return this.http
       .get<number>(`${this.apiURLOrders}/get/totalsales`)
       .pipe(map((objectValue: any) => objectValue.totalsales));
+  }
+  //to prevent circular dependency between orders and products library getProduct funtion implemented in the orders service
+  getProduct(productId: any): Observable<any> {
+    return this.http.get<any>(`${this.apiURLProducts}/${productId}`);
   }
 }

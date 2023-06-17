@@ -25,7 +25,9 @@ const routes: Routes = [
   imports: [CommonModule, RouterModule.forChild(routes), InputTextModule, ButtonModule, FormsModule, ReactiveFormsModule
   ],
   exports: [
-    UsersComponent
+    UsersComponent,
+    LoginComponent,
+    RegisterComponent
   ]
 })
 export class UsersModule { }
