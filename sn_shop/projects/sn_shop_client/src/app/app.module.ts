@@ -18,8 +18,14 @@ import { OrdersModule } from 'libs/orders/src/lib/orders.module';
 import { UsersModule } from 'libs/users/src/lib/users.module';
 import { ProductsModule } from 'libs/products/src/lib/products.module';
 import { CategoriesService } from '../../../../libs/products/src/lib/services/categories.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { MessageService } from 'primeng/api';
+import { JwtInterceptor } from 'libs/users/src/public-api';
+import { ToastModule } from 'primeng/toast';
 
+import { NgxStripeModule } from 'ngx-stripe';
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
@@ -36,10 +42,13 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     AccordionModule, BrowserAnimationsModule,
     UiModule, OrdersModule, UsersModule, ProductsModule,
-    HttpClientModule
+    HttpClientModule, ToastModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    NgxStripeModule.forRoot('pk_test_51NLk93AIOd20EhgPBLxVw2ekWbXPHmErq3De0px04E9x2Z849qwsNiqqlSQuUWH0x50MonDuE2kLzrJggyplho2I00FGbciXCm')
 
   ],
-  providers: [CategoriesService],
+  providers: [CategoriesService, MessageService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

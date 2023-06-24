@@ -16,6 +16,7 @@ npm i multer
 npm i bcryptjs
 npm i jsonwebtoken
 npm i express-jwt
+npm i stripe
 -----------------------------------------------------------
 ng new sn_shop --create-application=false
 cd sn_shop
@@ -29,8 +30,10 @@ ng generate application sn_shop_client
 //ng generate application admin --routing
 //ng generate application fashion-collection --routing
 
-ng serve --project=admin or ng serve admin
-ng serve --project=sn_shop_client  or ng serve fashion-sn_shop_client
+ng serve --project=admin 
+or ng serve admin
+ng serve --project=sn_shop_client --port=4300  
+or ng serve fashion-sn_shop_client
 
 
 //cd sn_shop
@@ -134,7 +137,14 @@ ng generate service --name=services/localstorage --project=users
 ng generate service --name=services/users --project=users 
 
 
-ng add @ngrx/store@latest --project=users --path=libs/users/src/lib/users.module.ts --stateInterface=state --no-interactive --facade --dry-run
+
+ng generate @nrwl/angular:ngrx --name=users --module=libs/users/src/lib/users.module.ts --stateInterface=state --no-interactive --facade --dry-run
+
+npm install @ngrx/store@15.2.1 --save --legacy-peer-deps
+npm install @ngrx/effects@15.2.1 --save --legacy-peer-deps
+npm install @ngrx/schematics@15.2.1 --save --legacy-peer-deps
+
+create reducer,acrions,effects,facades,models,selectors files in users lib
 --------------------------------------------------------------
 
 npm install @angular/animations --save
@@ -152,5 +162,8 @@ npm install i18n-iso-countries@6.6.0 --legacy-peer-deps //npm install i18n-iso-c
 npm install animate.css --legacy-peer-deps --save
 npm install normalize.css
 
+---stripe.js
+npm install ngx-stripe@v7-legacy --legacy-peer-deps
+npm install ngx-stripe@v8-lts @stripe/stripe-js
 
-
+npm install ngx-stripe@v8 @stripe/stripe-js --legacy-peer-deps  - ---- correct one 

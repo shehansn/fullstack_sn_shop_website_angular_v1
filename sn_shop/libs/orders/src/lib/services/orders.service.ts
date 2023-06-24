@@ -1,9 +1,12 @@
+import { OrderItem } from './../models/order-item';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Order } from '../models/order';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { StripeService } from 'ngx-stripe';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +15,10 @@ export class OrdersService {
 
   apiURLOrders = environment.apiUrl + 'orders';
   apiURLProducts = environment.apiUrl + 'products';
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private stripeService: StripeService
+  ) { }
 
   getOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(this.apiURLOrders);
@@ -48,5 +54,32 @@ export class OrdersService {
   //to prevent circular dependency between orders and products library getProduct funtion implemented in the orders service
   getProduct(productId: any): Observable<any> {
     return this.http.get<any>(`${this.apiURLProducts}/${productId}`);
+  }
+
+  createCheckoutSession(orderItem: OrderItem[]) {
+    return this.http.post(`${this.apiURLOrders}/create-checkout-session`, orderItem).pipe(
+      switchMap((session: { id: string }) => {
+        return this.stripeService.redirectToCheckout({ sessionId: session.id })
+        //return of(session);
+      })
+
+    );
+
+  }
+
+  // createCheckoutSession(orderItem:OrderItem[]):Observable<{id:string}>{
+  //   return this.http.post<{id:string}>(`${this.apiURLOrders}/create-checkout-session`, orderItem);
+  //   }
+
+  cashOrderData(order: Order) {
+    localStorage.setItem('orderData', JSON.stringify(order));
+  }
+
+  getCashOrderData(): Order {
+    return JSON.parse(localStorage.getItem('orderData'));
+  }
+
+  removeCashOrderData() {
+    localStorage.removeItem('orderData');
   }
 }

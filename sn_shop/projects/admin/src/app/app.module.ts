@@ -41,6 +41,10 @@ import { CategoriesService } from 'libs/products/src/lib/services/categories.ser
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UsersModule } from 'libs/users/src/lib/users.module';
 import { JwtInterceptor } from 'libs/users/src/lib/services/jwt.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { NgxStripeModule } from 'ngx-stripe';
 
 const UX_MODULE = [
   CardModule,
@@ -70,10 +74,13 @@ const UX_MODULE = [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     UsersModule,
+    NgxStripeModule.forRoot('pk_test_51NLk93AIOd20EhgPBLxVw2ekWbXPHmErq3De0px04E9x2Z849qwsNiqqlSQuUWH0x50MonDuE2kLzrJggyplho2I00FGbciXCm'),
     ...UX_MODULE
   ],
   providers: [

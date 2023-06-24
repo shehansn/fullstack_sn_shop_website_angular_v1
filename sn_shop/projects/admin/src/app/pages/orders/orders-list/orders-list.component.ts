@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Order } from 'libs/orders/src/lib/models/order';
 import { ORDER_STATUS } from '../order.constants';
 import { Subject } from 'rxjs';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './orders-list.component.html',
   styleUrls: ['./orders-list.component.css']
 })
-export class OrdersListComponent implements OnInit {
+export class OrdersListComponent implements OnInit, OnDestroy {
   orders: Order[] = [];
   orderStatus = ORDER_STATUS;
   //endsubs$: Subject<any> = new Subject();

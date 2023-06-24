@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Product } from '../../models/product';
 import { ProductsService } from '../../services/products.service';
 import { Subject, takeUntil } from 'rxjs';
@@ -8,7 +8,7 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './featured-products.component.html',
   styleUrls: ['./featured-products.component.css']
 })
-export class FeaturedProductsComponent {
+export class FeaturedProductsComponent implements OnInit, OnDestroy {
   featuredProducts: Product[] = [];
   endSubs$ = new Subject<void>();
 

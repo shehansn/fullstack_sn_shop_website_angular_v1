@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
 import { CartService } from 'libs/orders/src/lib/services/cart.service';
 import { CartItem } from 'libs/orders/src/lib/models/cart';
@@ -10,7 +10,7 @@ import { timer } from 'rxjs';
   templateUrl: './product-item.component.html',
   styleUrls: ['./product-item.component.css']
 })
-export class ProductItemComponent {
+export class ProductItemComponent implements OnInit {
   @Input()
   product!: Product;
   location: any;

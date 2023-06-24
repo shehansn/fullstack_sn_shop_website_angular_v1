@@ -1,3 +1,4 @@
+import { UsersFacade } from './../state/users.facade';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
@@ -15,7 +16,7 @@ export class UsersService {
 
   apiURLUsers = environment.apiUrl + 'users';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private usersFacade: UsersFacade) {
     countriesLib.registerLocale(require('i18n-iso-countries/langs/en.json'));
   }
 
@@ -59,17 +60,17 @@ export class UsersService {
   }
 
   initAppSession() {
-    //this.usersFacade.buildUserSession();
+    this.usersFacade.buildUserSession();
   }
 
   observeCurrentUser() {
-    //return this.usersFacade.currentUser$;
-    return true
+    return this.usersFacade.currentUser$;
+    // return true
   }
 
   isCurrentUserAuth() {
-    // return this.usersFacade.isAuthenticated$;
-    return true
+    return this.usersFacade.isAuthenticated$;
+    //return true
 
   }
 

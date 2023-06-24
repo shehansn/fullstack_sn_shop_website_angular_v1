@@ -2,13 +2,14 @@
   background-image: linear-gradient(235deg, #89a1c0, #1f3346);
   height: 100vh;
 
+
 }
 
 .login-register-panel {
   width: 650px;
   height: 525px;
   background-color: var(--blue-100);
-  position: absolute;
+  position: relative;
   left: calc(50% - 325px);
   top: calc(50% - 260px);
 

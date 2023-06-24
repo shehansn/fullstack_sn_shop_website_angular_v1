@@ -1,5 +1,5 @@
 import { CartItem } from 'libs/orders/src/lib/models/cart';
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { CartItemDetailed } from '../../models/cart';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { OrdersService } from '../../services/orders.service';
   templateUrl: './cart-page.component.html',
   styleUrls: ['./cart-page.component.css']
 })
-export class CartPageComponent {
+export class CartPageComponent implements OnInit, OnDestroy {
   cartItemsDetailed: CartItemDetailed[] = [];
   cartCount = 0;
   endSubs$ = new Subject<void>();

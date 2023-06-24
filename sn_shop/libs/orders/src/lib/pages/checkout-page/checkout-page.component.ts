@@ -22,7 +22,8 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
   //orderItems: OrderItem[] = [];
   orderItems: any;
   //userId: any;
-  userId = '6489e4b55ba66f03243f1df7'
+  //userId = '6489e4b55ba66f03243f1df7'
+  userId: any;
   countries: any;
   unsubscribe$ = new Subject<void>();
 
@@ -31,7 +32,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
     private usersService: UsersService,
     private formBuilder: FormBuilder,
     private cartService: CartService,
-    private ordersService: OrdersService
+    private ordersService: OrdersService,
   ) { }
 
   ngOnInit(): void {
@@ -60,22 +61,19 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
   }
 
   private _autoFillUserData() {
-    this.usersService
-      .observeCurrentUser()
-    // .pipe(takeUntil())
-    // .subscribe((user: { id: string; name: any; email: any; phone: any; city: any; street: any; country: any; zip: any; apartment: any; }) => {
-    //   if (user) {
-    //     this.userId = user.id;
-    //     this.checkoutForm['name'].setValue(user.name);
-    //     this.checkoutForm['email'].setValue(user.email);
-    //     this.checkoutForm['phone'].setValue(user.phone);
-    //     this.checkoutForm['city'].setValue(user.city);
-    //     this.checkoutForm['street'].setValue(user.street);
-    //     this.checkoutForm['country'].setValue(user.country);
-    //     this.checkoutForm['zip'].setValue(user.zip);
-    //     this.checkoutForm['apartment'].setValue(user.apartment);
-    //   }
-    // });
+    this.usersService.observeCurrentUser().pipe(takeUntil(this.unsubscribe$)).subscribe((user) => {
+      if (user) {
+        this.userId = user.id;
+        this.checkoutForm['name'].setValue(user.name);
+        this.checkoutForm['email'].setValue(user.email);
+        this.checkoutForm['phone'].setValue(user.phone);
+        this.checkoutForm['city'].setValue(user.city);
+        this.checkoutForm['street'].setValue(user.street);
+        this.checkoutForm['country'].setValue(user.country);
+        this.checkoutForm['zip'].setValue(user.zip);
+        this.checkoutForm['apartment'].setValue(user.apartment);
+      }
+    });
   }
 
   private _getCartItems() {
@@ -116,20 +114,34 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
       user: this.userId,
       dateOrdered: `${Date.now()}`
     };
-    console.log('order', order)
-    this.ordersService.createOrder(order).subscribe(
 
-      () => {
-        //redirect to thank you page // payment
-        console.log('successfully added order', order);
-        this.cartService.emptyCart();
-        this.router.navigate(['/success']);
-      },
-      () => {
-        //display some message to user
+    console.log('order created from checkout page', order);
+    this.ordersService.cashOrderData(order);
+
+    this.ordersService.createCheckoutSession(this.orderItems).subscribe(error => {
+      //console.log('session id from checkout page', session);
+      if (error) {
+        console.log('error in redirect to payment ', error);
       }
-    );
+    });
+
+    /*
+    // this.ordersService.createCheckoutSession(this.orderItems).subscribe(session => {
+    //   console.log('session id from checkout page', session);
+    //   // if (error) {
+    //   //   console.log('error in redirecting create checkout session page ', error);
+    //   // }
+    // });
+
+    // this.ordersService.createCheckoutSession(this.orderItems).subscribe((session) => {
+    //   this.stripeService.redirectToCheckout({ sessionId: session.id }).subscribe(error=>{
+    //   })
+    // });
+
+*/
+
   }
+
 
   get checkoutForm() {
     return this.checkoutFormGroup.controls;
